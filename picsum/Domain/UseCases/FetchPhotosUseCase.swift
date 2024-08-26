@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FetchPhotosUseCase {
-    func execute(page: Int, completion: @escaping (Result<[Photo], Error>)  -> Void)
+    func execute(page: Int, pageSize: Int, completion: @escaping (Result<[Photo], Error>)  -> Void)
 }
 
 class FetchPhotosUseCaseImpl: FetchPhotosUseCase {
@@ -18,7 +18,7 @@ class FetchPhotosUseCaseImpl: FetchPhotosUseCase {
         self.repository = repository
     }
     
-    func execute(page: Int, completion: @escaping (Result<[Photo], any Error>) -> Void) {
-        repository.fetchPhotos(page: page, completion: completion)
+    func execute(page: Int, pageSize: Int, completion: @escaping (Result<[Photo], any Error>) -> Void) {
+        repository.fetchPhotos(page: page, pageSize: pageSize, completion: completion)
     }
 }

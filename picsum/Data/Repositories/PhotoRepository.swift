@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PhotoRepository {
-    func fetchPhotos(page: Int, completion: @escaping (Result<[Photo], Error>) -> Void )
+    func fetchPhotos(page: Int, pageSize: Int, completion: @escaping (Result<[Photo], Error>) -> Void )
 }
 
 class PhotoRepositoryImpl: PhotoRepository {
@@ -18,8 +18,8 @@ class PhotoRepositoryImpl: PhotoRepository {
         self.networkService = networkService
     }
     
-    func fetchPhotos(page: Int, completion: @escaping (Result<[Photo], any Error>) -> Void) {
-        guard let url = APIEndpoints.photos(page: page, limit: 100) else {
+    func fetchPhotos(page: Int, pageSize: Int, completion: @escaping (Result<[Photo], any Error>) -> Void) {
+        guard let url = APIEndpoints.photos(page: page, limit: pageSize) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
             return
         }

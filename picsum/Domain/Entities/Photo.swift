@@ -13,7 +13,7 @@ struct Photo: Codable {
     let width: Int
     let height: Int
     let url: String
-    let downloadUrl: String
+    let download_url: String
     
     var sizeDescription: String {
         return "\(width)x\(height)"

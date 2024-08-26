@@ -28,6 +28,8 @@
 		949F3D152C7B3C5D009B4C1F /* PhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 949F3D142C7B3C5D009B4C1F /* PhotoTableViewCell.xib */; };
 		949F3D162C7B3C5D009B4C1F /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F3D132C7B3C5D009B4C1F /* PhotoTableViewCell.swift */; };
 		94EC92CD2C7C63CE00C37F96 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC92CC2C7C63CE00C37F96 /* String+Extensions.swift */; };
+		94EC92D12C7C713F00C37F96 /* PhotoModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC92D02C7C713F00C37F96 /* PhotoModelTests.swift */; };
+		94EC92D22C7C71F500C37F96 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949F3CFD2C7ABFC4009B4C1F /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,7 @@
 		949F3D132C7B3C5D009B4C1F /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
 		949F3D142C7B3C5D009B4C1F /* PhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoTableViewCell.xib; sourceTree = "<group>"; };
 		94EC92CC2C7C63CE00C37F96 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		94EC92D02C7C713F00C37F96 /* PhotoModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				949F3CDA2C7ABC13009B4C1F /* picsumTests.swift */,
+				94EC92D02C7C713F00C37F96 /* PhotoModelTests.swift */,
 			);
 			path = picsumTests;
 			sourceTree = "<group>";
@@ -412,6 +416,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EC92D22C7C71F500C37F96 /* Photo.swift in Sources */,
+				94EC92D12C7C713F00C37F96 /* PhotoModelTests.swift in Sources */,
 				949F3CDB2C7ABC13009B4C1F /* picsumTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,7 +15,7 @@ protocol PhotoListViewModelDelegate: AnyObject {
 class PhotoListViewModel {
     private let fetchPhotsUseCase: FetchPhotosUseCase
     private var currentPage = 1
-    private var pageSize = 10
+    private var pageSize = 100
     var isLoading = false
     var canLoadMore = false
     
@@ -42,7 +42,6 @@ class PhotoListViewModel {
                     self.delegate?.didUpdatePhotos()
                 case .failure(let error):
                     self.delegate?.didFailWithError(error)
-                
             }
         }
     }

@@ -46,7 +46,6 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="2sD-V1-v3s" firstAttribute="leading" secondItem="IYU-eJ-jCt" secondAttribute="leading" constant="20" id="6w4-Eo-u1J"/>
-                            <constraint firstItem="ry1-c7-ebx" firstAttribute="top" secondItem="IYU-eJ-jCt" secondAttribute="top" id="C1k-gc-3dR"/>
                             <constraint firstItem="di7-vw-A96" firstAttribute="leading" secondItem="IYU-eJ-jCt" secondAttribute="leading" constant="20" id="NEw-jG-qob"/>
                             <constraint firstItem="ry1-c7-ebx" firstAttribute="leading" secondItem="IYU-eJ-jCt" secondAttribute="leading" id="fBp-if-fLz"/>
                             <constraint firstAttribute="trailing" secondItem="di7-vw-A96" secondAttribute="trailing" constant="20" id="kvL-OY-Heq"/>

@@ -32,10 +32,8 @@ class PhotoTableViewCell: UITableViewCell {
         aspectConstraint = nil
     }
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         photo.contentMode = .scaleAspectFill
         photo.clipsToBounds = true
         photo.translatesAutoresizingMaskIntoConstraints = false
@@ -43,33 +41,21 @@ class PhotoTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
     func configure(with data: Photo) {
         authorLabel.text = data.author
         imageSizeLabel.text = data.sizeDescription
         
+        // Make sure that image fit with screen and not be distorted
         if let constraint = (photo.constraints.first { $0.firstAttribute == .height }) {
             constraint.isActive = false
         }
-        
         let aspectRatioConstraint = photo.heightAnchor.constraint(equalTo: photo.widthAnchor, multiplier: data.aspectRatio)
-            aspectRatioConstraint.isActive = true
+        aspectRatioConstraint.isActive = true
         
-       
-        
+        // Cahing image when load from network
+        // Make sure that not causing lagging
         self.photo.loadImageUsingCache(withUrl: data.download_url)
-        
-//        if let url = URL(string: data.download_url) {
-//            DispatchQueue.global().async {
-//                if let dataUrl = try? Data(contentsOf: url) {
-//                    DispatchQueue.main.async {
-//                        self.photo.image = UIImage(data: dataUrl)
-//                    }
-//                }
-//            }
-//        }
-        
     }
 }

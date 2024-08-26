@@ -67,6 +67,21 @@ class PhotoListViewController: UIViewController {
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
+    
+    private func normalizeTextSearch(query: String) -> String {
+        // Filter out special characters
+        let filteredText = query.filter { character in
+            return character.isLetter || character.isNumber || "!@#$%^&*():.,<>/[]?".contains(character)
+        }
+        
+        // Remove diacritics
+        let normalizedText = filteredText.folding(options: .diacriticInsensitive, locale: .current)
+
+        // Limit the text to 15 characters
+        let limitedText = String(normalizedText.prefix(15))
+        
+        return limitedText
+    }
 }
 
 extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -93,37 +108,25 @@ extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension PhotoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let filteredText = searchText.filter { character in
-            return character.isLetter || character.isNumber || "!@#$%^&*():.,<>/[]?".contains(character)
-        }
-        
-        let limitedText = String(filteredText.prefix(15))
-        searchBar.text = limitedText
-        
-        performSearch(with: limitedText)
+        let normalizedText = normalizeTextSearch(query: searchText)
+        searchBar.text = normalizedText
+        performSearch(with: normalizedText)
     }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if UIPasteboard.general.string == text {
-            let filteredText = text.filter { character in
-                return character.isLetter || character.isNumber || "!@#$%^&*():.,<>/[]?".contains(character)
-            }
-            
-            let limitedText = String(filteredText.prefix(15))
-            
-            let newText = (searchBar.text as NSString?)?.replacingCharacters(in: range, with: limitedText)
-            searchBar.text = newText
-            performSearch(with: newText ?? "")
-            
+            let normalizedText = normalizeTextSearch(query: text)
+            searchBar.text = normalizedText
+            performSearch(with: normalizedText)
             return false
         }
-        
         return true
     }
 }
 
 extension PhotoListViewController: PhotoListViewModelDelegate {
     func didUpdatePhotos() {
+        // Update photo from view model to table when fetching from API success
         filteredPhotos = viewModel.photos
         DispatchQueue.main.async {
             self.activityIndicator.stopAnimating()

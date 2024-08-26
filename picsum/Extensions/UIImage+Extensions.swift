@@ -12,6 +12,7 @@ let imageCache = NSCache<NSString, UIImage>()
 
 extension UIImageView {
     func loadImageUsingCache(withUrl urlString: String) {
+        // Set default image when loading image from network
         self.image = UIImage(systemName: "photo")
         
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
@@ -19,7 +20,8 @@ extension UIImageView {
                 self.image = cachedImage
             }
             return
-        }
+        }   
+        
         
         guard let url = URL(string: urlString) else {
             return

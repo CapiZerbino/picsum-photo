@@ -36,6 +36,9 @@ class PhotoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        photo.contentMode = .scaleAspectFill
+        photo.clipsToBounds = true
+        photo.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,12 +49,15 @@ class PhotoTableViewCell: UITableViewCell {
     func configure(with data: Photo) {
         authorLabel.text = data.author
         imageSizeLabel.text = data.sizeDescription
-        let aspect = data.width / data.height
-
-        let constraint = NSLayoutConstraint(item: photo, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: photo, attribute: NSLayoutConstraint.Attribute.height, multiplier: CGFloat(aspect), constant: 0.0)
         
-        constraint.priority = UILayoutPriority(999)
-        aspectConstraint = constraint
+        if let constraint = (photo.constraints.first { $0.firstAttribute == .height }) {
+            constraint.isActive = false
+        }
+        
+        let aspectRatioConstraint = photo.heightAnchor.constraint(equalTo: photo.widthAnchor, multiplier: data.aspectRatio)
+            aspectRatioConstraint.isActive = true
+        
+       
         
         self.photo.loadImageUsingCache(withUrl: data.download_url)
         

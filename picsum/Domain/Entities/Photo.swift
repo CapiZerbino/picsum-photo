@@ -18,4 +18,8 @@ struct Photo: Codable {
     var sizeDescription: String {
         return "\(width)x\(height)"
     }
+    
+    var aspectRatio: CGFloat {
+        return CGFloat(height) / CGFloat(width)
+    }
 }

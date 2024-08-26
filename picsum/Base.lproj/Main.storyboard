@@ -25,7 +25,7 @@
                                     <navigationItem title="Picsum Photo" id="r3t-yI-IlI"/>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" placeholder="Search by author or id" translatesAutoresizingMaskIntoConstraints="NO" id="yJz-02-ZFs">
+                            <searchBar contentMode="redraw" placeholder="Search by author or id..." translatesAutoresizingMaskIntoConstraints="NO" id="yJz-02-ZFs">
                                 <rect key="frame" x="0.0" y="88" width="393" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="E2a-Q8-qps"/>

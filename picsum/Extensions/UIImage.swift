@@ -12,10 +12,12 @@ let imageCache = NSCache<NSString, UIImage>()
 
 extension UIImageView {
     func loadImageUsingCache(withUrl urlString: String) {
-        self.image = UIImage(named: "placeholder")
+        self.image = UIImage(systemName: "photo")
         
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
-            self.image = cachedImage
+            DispatchQueue.main.async {
+                self.image = cachedImage
+            }
             return
         }
         
@@ -30,12 +32,21 @@ extension UIImageView {
             }
             
             if let data = data, let downloadedImage = UIImage(data: data) {
-                imageCache.setObject(downloadedImage, forKey: urlString as NSString)
-                
                 DispatchQueue.main.async {
-                    self.image = downloadedImage
+                    let scaledImage = self.scaleImage(downloadedImage, to: self.frame.size)
+                    imageCache.setObject(scaledImage, forKey: urlString as NSString)
+                    self.image = scaledImage
                 }
             }
         }.resume()
+    }
+    
+    // Optimize image to prevent lagging
+    private func scaleImage(_ image: UIImage, to size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
+        image.draw(in: CGRect(origin: .zero, size: size))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage!
     }
 }
